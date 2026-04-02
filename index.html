@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — Jeremy A</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #fafaf8;
+      --ink:   #141412;
+      --soft:  #9a9890;
+      --line:  #e5e4e0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 17px; }
+
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      padding: 2.2rem clamp(1.5rem, 8vw, 6rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      opacity: 0;
+      animation: appear 0.6s 0.05s ease forwards;
+    }
+
+    .nav-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--ink); }
+
+    main {
+      flex: 1;
+      padding: clamp(4rem, 10vh, 7rem) clamp(1.5rem, 8vw, 6rem) 0;
+    }
+
+    /* ── page title ── */
+    .page-title {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      letter-spacing: -0.015em;
+      line-height: 1.1;
+      margin-bottom: 3.5rem;
+      opacity: 0;
+      animation: rise 0.7s 0.15s ease forwards;
+    }
+
+    /* ── two-col layout ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 0 6rem;
+      border-top: 1px solid var(--line);
+      opacity: 0;
+      animation: rise 0.7s 0.28s ease forwards;
+    }
+
+    .about-sidebar {
+      padding-top: 2.2rem;
+    }
+
+    .sidebar-section { margin-bottom: 2.8rem; }
+
+    .sidebar-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .sidebar-value {
+      font-size: 0.85rem;
+      line-height: 1.75;
+      color: var(--ink);
+    }
+
+    .sidebar-value a {
+      color: var(--soft);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .sidebar-value a:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* ── main prose ── */
+    .about-prose {
+      padding-top: 2.2rem;
+      border-left: 1px solid var(--line);
+      padding-left: 3rem;
+    }
+
+    .prose-block { margin-bottom: 2.5rem; }
+
+    .prose-block h2 {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-size: 1.25rem;
+      margin-bottom: 0.9rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .prose-block p {
+      font-size: 0.9rem;
+      line-height: 1.95;
+      color: var(--soft);
+      max-width: 58ch;
+    }
+
+    .prose-block p + p { margin-top: 1rem; }
+
+    /* ── footer ── */
+    footer {
+      padding: clamp(4rem, 8vh, 6rem) clamp(1.5rem, 8vw, 6rem) 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      opacity: 0;
+      animation: appear 0.6s 0.5s ease forwards;
+    }
+
+    .footer-left { font-size: 0.75rem; color: var(--soft); line-height: 1.8; }
+
+    .footer-right { font-size: 0.72rem; color: var(--soft); text-align: right; }
+
+    .footer-right a {
+      color: var(--soft);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .footer-right a:hover { color: var(--ink); border-color: var(--ink); }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes appear {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; gap: 0; }
+      .about-prose { border-left: none; padding-left: 0; border-top: 1px solid var(--line); }
+      footer { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+      .footer-right { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-name" href="index.html">Jeremy Angwenyi</a>
+    <ul class="nav-links">
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="https://github.com/JeremyOmwenga" target="_blank" rel="noopener">GitHub ↗</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1 class="page-title">A little about me.</h1>
+
+    <div class="about-grid">
+
+      <!-- Sidebar -->
+      <aside class="about-sidebar">
+        <div class="sidebar-section">
+          <span class="sidebar-label">Based in</span>
+          <div class="sidebar-value">Nairobi, Kenya</div>
+        </div>
+        <div class="sidebar-section">
+          <span class="sidebar-label">Focus</span>
+          <div class="sidebar-value">
+            <a href="https://finops.ojhedges.dpdns.org">Financial thought pieces</a><br>
+            <a href="https://cogsec.ojhedges.dpdns.org">Cognitive Security bits</a>
+            
+          </div>
+        </div>
+        <div class="sidebar-section">
+          <!--<span class="sidebar-label">Elsewhere</span>-->
+          <div class="sidebar-value">
+            
+          </div>
+        </div>
+      </aside>
+
+      <!-- Prose -->
+      <div class="about-prose">
+
+        <div class="prose-block">
+          <h2>Background</h2>
+          <p>
+           Computers have always been fascinating to me. I studied CS but shifted towards FinTech when I decided I could improve my math skills and utilize them in sycnhrony with coding for the best for both worlds.
+          </p>
+          <p>
+            A key area of focus for me is financial accounting and tax advisory. I am laying the foundation for that by currently studying for the ACCA qualification. More to follow.
+          </p>
+        </div>
+
+        <div class="prose-block">
+          <h2>What I work on</h2>
+          <p>
+            I spend most of my time at the intersection of information systems and the
+            decisions they shape. Right now that means cognitive security which is how narratives
+            spread, how they're manufactured, and how to study them rigorously, and
+            financial news, tracking the relationship between media output and market behaviour.
+          </p>
+        </div>
+
+        
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-left">
+      © 2026. Jeremy Angwenyi<br>
+      Nairobi, Kenya
+    </div>
+    
+  </footer>
+
+  <script>
+    // Fade-in on arrival from index
+    document.body.style.opacity = '0';
+    requestAnimationFrame(() => {
+      document.body.style.transition = 'opacity 0.35s ease';
+      document.body.style.opacity = '1';
+    });
+
+    // Smooth exit back to index
+    document.querySelector('.nav-name').addEventListener('click', e => {
+      e.preventDefault();
+      document.body.style.transition = 'opacity 0.3s ease';
+      document.body.style.opacity = '0';
+      setTimeout(() => window.location.href = 'index.html', 300);
+    });
+  </script>
+
+</body>
+</html>
