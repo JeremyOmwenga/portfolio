@@ -65,15 +65,34 @@
     }
 
     /* ── page title ── */
+    .page-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+      opacity: 0;
+      animation: rise 0.7s 0.15s ease forwards;
+    }
+
     .page-title {
       font-family: 'Instrument Serif', serif;
       font-weight: 400;
       font-size: clamp(2rem, 4.5vw, 3.2rem);
       letter-spacing: -0.015em;
       line-height: 1.1;
-      margin-bottom: 3.5rem;
-      opacity: 0;
-      animation: rise 0.7s 0.15s ease forwards;
+      margin-bottom: 0;
+      opacity: 1;
+      animation: none;
+    }
+
+    .profile-photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid var(--line);
     }
 
     /* ── two-col layout ── */
@@ -182,6 +201,8 @@
       .about-prose { border-left: none; padding-left: 0; border-top: 1px solid var(--line); }
       footer { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
       .footer-right { text-align: left; }
+      .page-title-row { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .profile-photo { width: 120px; height: 120px; }
     }
   </style>
 </head>
@@ -196,7 +217,14 @@
   </nav>
 
   <main>
-    <h1 class="page-title">A little about me.</h1>
+    <div class="page-title-row">
+      <h1 class="page-title">A little about me.</h1>
+      <img
+        src="your-photo.jpg"
+        alt="Jeremy Angwenyi"
+        class="profile-photo"
+      />
+    </div>
 
     <div class="about-grid">
 
