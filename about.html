@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — Jeremy Angwenyi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #fafaf8;
+      --ink:   #141412;
+      --soft:  #9a9890;
+      --line:  #e5e4e0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 17px; }
+
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── nav ── */
+    nav {
+      padding: 2.2rem clamp(1.5rem, 8vw, 6rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      opacity: 0;
+      animation: appear 0.6s 0.05s ease forwards;
+    }
+
+    .nav-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2rem;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--ink); }
+
+    /* ── main ── */
+    main {
+      flex: 1;
+      padding: clamp(4rem, 10vh, 7rem) clamp(1.5rem, 8vw, 6rem) 0;
+    }
+
+    .page-title {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      letter-spacing: -0.015em;
+      line-height: 1.1;
+      margin-bottom: 3.5rem;
+      opacity: 0;
+      animation: rise 0.7s 0.15s ease forwards;
+    }
+
+    /* ── sections ── */
+    .section {
+      border-top: 1px solid var(--line);
+      padding: 2.8rem 0;
+      opacity: 0;
+    }
+
+    .section:nth-child(1) { animation: rise 0.7s 0.25s ease forwards; }
+    .section:nth-child(2) { animation: rise 0.7s 0.35s ease forwards; }
+    .section:nth-child(3) { animation: rise 0.7s 0.45s ease forwards; }
+    .section:nth-child(4) { animation: rise 0.7s 0.55s ease forwards; }
+    .section:nth-child(5) { animation: rise 0.7s 0.65s ease forwards; }
+
+    .section-inner {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 0 6rem;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--soft);
+      padding-top: 0.15rem;
+    }
+
+    .section-body {
+      border-left: 1px solid var(--line);
+      padding-left: 3rem;
+    }
+
+    .section-body p {
+      font-size: 0.9rem;
+      line-height: 1.95;
+      color: var(--soft);
+      max-width: 60ch;
+    }
+
+    .section-body p + p { margin-top: 1rem; }
+
+    /* ── coursework bullets ── */
+    .coursework-list {
+      list-style: none;
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem 2rem;
+      max-width: 60ch;
+    }
+
+    .coursework-list li {
+      font-size: 0.85rem;
+      color: var(--soft);
+      line-height: 1.6;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .coursework-list li::before {
+      content: '—';
+      color: var(--line);
+      flex-shrink: 0;
+    }
+
+    /* ── timeline ── */
+    .timeline {
+      position: relative;
+      padding-left: 1.2rem;
+      max-width: 52ch;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 2rem 1.6rem;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -0.25rem;
+      top: 0.55rem;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+
+    .timeline-year {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-role {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin-bottom: 0.1rem;
+    }
+
+    .timeline-org {
+      font-size: 0.82rem;
+      color: var(--soft);
+    }
+
+    /* ── portfolio links ── */
+    .project-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      max-width: 56ch;
+    }
+
+    .project-item a {
+      text-decoration: none;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      group: true;
+    }
+
+    .project-arrow {
+      font-size: 0.85rem;
+      color: var(--line);
+      flex-shrink: 0;
+      padding-top: 0.1rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .project-item a:hover .project-arrow {
+      color: var(--ink);
+      transform: translateX(3px);
+    }
+
+    .project-title {
+      font-size: 0.88rem;
+      color: var(--ink);
+      line-height: 1.55;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+
+    .project-item a:hover .project-title {
+      border-color: var(--ink);
+    }
+
+    .project-desc {
+      font-size: 0.8rem;
+      color: var(--soft);
+      margin-top: 0.3rem;
+      line-height: 1.7;
+    }
+
+    /* ── contacts ── */
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 1.2rem;
+    }
+
+    .contact-type {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--soft);
+      min-width: 4rem;
+    }
+
+    .contact-value {
+      font-size: 0.88rem;
+      color: var(--ink);
+    }
+
+    .contact-value a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1px;
+      transition: border-color 0.2s;
+    }
+
+    .contact-value a:hover { border-color: var(--ink); }
+
+    /* ── footer ── */
+    footer {
+      padding: clamp(4rem, 8vh, 6rem) clamp(1.5rem, 8vw, 6rem) 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      opacity: 0;
+      animation: appear 0.6s 0.8s ease forwards;
+    }
+
+    .footer-left { font-size: 0.75rem; color: var(--soft); line-height: 1.8; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes appear {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @media (max-width: 700px) {
+      .section-inner { grid-template-columns: 1fr; gap: 1rem; }
+      .section-body { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 1.2rem; }
+      .coursework-list { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-name" href="index.html">Jeremy Angwenyi</a>
+    <ul class="nav-links">
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="https://github.com/JeremyOmwenga" target="_blank" rel="noopener">GitHub ↗</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1 class="page-title">About.</h1>
+
+    <!-- Intro -->
+    <div class="section">
+      <div class="section-inner">
+        <div class="section-label">Intro</div>
+        <div class="section-body">
+          <p>
+            Hi, my name is Jeremy Angwenyi and I work with computers and financial tools. More specifically,
+            I'm interested in tax policy and credit financing frameworks within sub-Saharan Africa. I am
+            completing my BSc. Informatics and Computer Science from Strathmore University this year and  
+            proceeding to do ACCA.
+          </p>
+          <p>
+            Computer Science as a course was a no-brainer for me as I have had an innate interest in
+            computing since primary school. I would take apart electronics at home and reverse-engineer
+            them to understand how they work — much to the dismay (and eventual acceptance) of my parents.
+          </p>
+          <p>Within campus I dived deeper into the software side, focusing on (just to name a few):</p>
+          <ul class="coursework-list">
+            <li>Networking</li>
+            <li>Advanced Databases</li>
+            <li>Server Administration</li>
+            <li>Data Structures & Algorithms</li>
+            <li>Computing for Bioinformatics</li>
+            <li>Information Systems Security & Design</li>
+            <li>Mobile & Web Application Development</li>
+            <li>System Analysis & Design</li>
+            <li>Core Math (Linear Algebra, Calculus I–III, Statistics I–III)</li>
+            <li>Machine Learning & applied AI </li>
+          </ul>
+          <p style="margin-top:1rem;">
+            I became especially engrossed with Machine Learning applications in finance — learning how financial
+            models are created with forecasting flows, risk adjustment, and calibration according to current
+            market needs.
+          </p>
+          <p>
+            I'm still in the early stages of my career, learning day by day. I document my findings,
+            opinions, and interesting anecdotes through blogs on finance news and cognitive security
+            (linked on the <a href="index.html" style="color:var(--soft);border-bottom:1px solid var(--line);padding-bottom:1px;text-decoration:none;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--soft)';this.style.borderColor='var(--line)'">home page</a>).
+            I look forward to connecting and sharing insights — I hope you may learn something new from the
+            blogs. There's lots more to come, so stay tuned :)
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Experience -->
+    <div class="section">
+      <div class="section-inner">
+        <div class="section-label">Experience</div>
+        <div class="section-body">
+          <div class="timeline">
+
+            <div class="timeline-item">
+              <div class="timeline-year">2025</div>
+              <div class="timeline-role">Service Desk Analyst Intern</div>
+              <div class="timeline-org">Sidian Bank</div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">2024</div>
+              <div class="timeline-role">Hardware Technician (part time)</div>
+              <div class="timeline-org">Skypro Limited</div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">2022</div>
+              <div class="timeline-role">IT Support Technician (part time)</div>
+              <div class="timeline-org">Strathmore School</div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">2020 – 2024</div>
+              <div class="timeline-role">Activities Instructor (weekends)</div>
+              <div class="timeline-org">Hodari Boys Club</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Portfolio -->
+    <div class="section">
+      <div class="section-inner">
+        <div class="section-label">Projects</div>
+        <div class="section-body">
+          <ul class="project-list">
+
+            <li class="project-item">
+              <a href="https://github.com/JeremyOmwenga/Financial-forecast" target="_blank" rel="noopener">
+                <span class="project-arrow">↗</span>
+                <div>
+                  <div class="project-title">Stock Price Forecasting Model</div>
+                  <div class="project-desc">
+                    An ensemble ML model for forecasting stock prices using moving averages and
+                    sentiment analysis of financial news.
+                  </div>
+                </div>
+              </a>
+            </li>
+
+            <li class="project-item">
+              <a href="https://github.com/JeremyOmwenga/edukenya" target="_blank" rel="noopener">
+                <span class="project-arrow">↗</span>
+                <div>
+                  <div class="project-title">AI-Augmented CBC Learning Platform</div>
+                  <div class="project-desc">
+                    An AI-augmented learning platform custom-made for Kenya's
+                    Competency Based Curriculum.
+                  </div>
+                </div>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="section">
+      <div class="section-inner">
+        <div class="section-label">Contact</div>
+        <div class="section-body">
+          <ul class="contact-list">
+            <li>
+              <span class="contact-type">Email</span>
+              <span class="contact-value">
+                <a href="mailto:jeremyangwenyi.ja@gmail.com">jeremyangwenyi.ja@gmail.com</a>
+              </span>
+            </li>
+            <li>
+              <span class="contact-type">Phone</span>
+              <span class="contact-value">
+                <a href="tel:+254799029620">+254 799 029 620</a>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-left">
+      © 2026. Jeremy Angwenyi
+    </div>
+  </footer>
+
+  <script>
+    document.body.style.opacity = '0';
+    requestAnimationFrame(() => {
+      document.body.style.transition = 'opacity 0.35s ease';
+      document.body.style.opacity = '1';
+    });
+
+    document.querySelector('.nav-name').addEventListener('click', e => {
+      e.preventDefault();
+      document.body.style.transition = 'opacity 0.3s ease';
+      document.body.style.opacity = '0';
+      setTimeout(() => window.location.href = 'index.html', 300);
+    });
+  </script>
+
+</body>
+</html>
